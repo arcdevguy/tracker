@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../location/location_service.dart';
 
-class HomeProvider extends ChangeNotifier {
+class LocationProvider extends ChangeNotifier {
   bool _isTracking = false;
   bool _permissionGranted = false;
   final _logs = <String>[];
@@ -15,7 +15,7 @@ class HomeProvider extends ChangeNotifier {
   List<String> get logs => _logs;
 
   final LocationService locationService;
-  HomeProvider({required this.locationService});
+  LocationProvider({required this.locationService});
 
   Future<void> startTracking() async {
     try {

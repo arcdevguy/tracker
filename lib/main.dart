@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'src/injector.dart';
 import 'src/page/home_page.dart';
-import 'src/provider/home_provider.dart';
+import 'src/provider/location_provider.dart';
 
 void main() {
   Injector.init();
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: ChangeNotifierProvider(
-        create: (context) => getIt<HomeProvider>(),
+        create: (context) => getIt<LocationProvider>(),
         child: const HomePage(),
       ),
     );

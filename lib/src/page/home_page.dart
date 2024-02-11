@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/home_provider.dart';
+import '../provider/location_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,12 +21,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Tracking: ${context.watch<HomeProvider>().isTracking ? 'yes' : 'no'}'),
+        title: Text('Tracking: ${context.watch<LocationProvider>().isTracking ? 'yes' : 'no'}'),
         actions: [
           AnimatedBuilder(
             animation: _controller,
             builder: (context, child) {
-              if (context.read<HomeProvider>().isTracking) {
+              if (context.read<LocationProvider>().isTracking) {
                 return Transform.rotate(
                   angle: _controller.value * 2 * math.pi,
                   child: const CircleAvatar(
@@ -44,12 +44,12 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         child: AnimatedBuilder(
           animation: _controller,
           builder: (context, child) {
-            if (context.read<HomeProvider>().isTracking) {
+            if (context.read<LocationProvider>().isTracking) {
               return SizedBox.expand(
                 child: ListView.builder(
-                  itemCount: context.read<HomeProvider>().logs.length,
+                  itemCount: context.read<LocationProvider>().logs.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Text(context.read<HomeProvider>().logs[index]);
+                    return Text(context.read<LocationProvider>().logs[index]);
                   },
                 ),
               );
@@ -69,10 +69,11 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<HomeProvider>().isTracking
-            ? context.read<HomeProvider>().stopTracking()
-            : context.read<HomeProvider>().startTracking(),
-        child: context.read<HomeProvider>().isTracking ? const Icon(Icons.stop) : const Icon(Icons.play_arrow_sharp),
+        onPressed: () => context.read<LocationProvider>().isTracking
+            ? context.read<LocationProvider>().stopTracking()
+            : context.read<LocationProvider>().startTracking(),
+        child:
+            context.read<LocationProvider>().isTracking ? const Icon(Icons.stop) : const Icon(Icons.play_arrow_sharp),
       ),
     );
   }
